@@ -1017,11 +1017,11 @@ h6:hover .anchor-link {
 <p>另一方面，很多工程师也有写技术Blog记录自己的心得笔记的习惯。 如果能一边用Jupyter Notebook实验代码， 一边添加相关的文本描述， 最后直接将Jupyter Notebook的内容发布为Blog， 那将获得非常流畅的技术Blog创作体验。</p>
 <p>(比如要写一份分析报告， 首先要开matlab编写代码， 运行代码， 将代码的结果保存为文本， 图片，Excel等文件， 然后再开Word， 一边写报告， 一边要导入图片， 数据。 更糟糕的是， 一旦代码发生更改， 程序生成的结果发生了改变， 可能又得重新调整Word文档。 这个过程非常的繁琐耗时。 由于报告的内容和代码并非紧密的结合， 如果时间一久， 那么很可能会想不起来当时某个处理的细节， 然后又找不到当时的代码。)</p>
 <p>这篇文章就是讲解如何利用Pelican将Jupyter Notebook上做的实验直接发布在Git Pages上。</p>
-<p>这里是一个效果展示。<a href="https://github.com/junjiecai/jupyter_labs/tree/master/exolution">这个git repo</a>用于存放jupyter notebooks实验，而<a href="https://junjiecai.github.io">这里</a>是这个notebooks被发布成blogs以后的效果。</p>
+<p>这里是一个效果展示。<a href="https://github.com/hongfeibao1314/hongfeibao1314.github.io/tree/dev">这个git repo</a>用于存放jupyter notebooks实验，而<a href="https://hongfeibao1314.github.io/">这里</a>是这个notebooks被发布成blogs以后的效果。</p>
 <h1 id="重要的组件">重要的组件<a class="anchor-link" href="#重要的组件">Â¶</a></h1><p>在Jupyter Notebook中编写内容， 然后由Pelican负责将jupyter notebook组装成blog html， Github Pages则提供了网站服务，让大家能通过浏览器看到你的Blog。</p>
 <p>不过要注意的是，转成html后的代码部分是不能运行的，如果希望读者享受到Jupyter Notebook的便利，可以将文章对应的.ipynb源文件的地址(可以把源文件也放在Github)贴在文章里，供读者下载。例如这篇文章的。</p>
 <h2 id="Github-Pages">Github Pages<a class="anchor-link" href="#Github-Pages">Â¶</a></h2><p>Github Pages是github公司提供的免费的静态网站托管服务，具体使用上，就是注册用户在Gihub上创建过一个[username].github.io的repo,并且在里面的master branch存有html文件的话，那么其他人就可以通过<a href="http://[username].github.io">http://[username].github.io</a> 这个链接访问到这些html页面。</p>
-<p>例如我把这篇文章对应的blog_with_jupyter.html放在了junjiecai.github.io的repo中的master branch里(这里是<a href="https://github.com/junjiecai/junjiecai.github.io/tree/master/posts/2016/Aug/10/blog_with_jupyter">链接</a>，那么大家就可以通过(<a href="http://junjiecai.github.io/posts/2016/Aug/10/blog_with_jupyter">http://junjiecai.github.io/posts/2016/Aug/10/blog_with_jupyter</a>) 看到这篇文章</p>
+<p>例如我把这篇文章对应的0626_pelican_jupyter_blog.html放在了hongfeibao1314.github.io的repo中的master branch里(这里是<a href="https://hongfeibao1314.github.io/">链接</a>，那么大家就可以通过(<a href="https://hongfeibao1314.github.io/0626_pelican_jupyter_blog">https://hongfeibao1314.github.io/0626_pelican_jupyter_blog</a>) 看到这篇文章</p>
 <p>如果用户愿意，也可以绑定自己准备的域名，代替<a href="http://[username].github.io">http://[username].github.io</a></p>
 <h2 id="Pelican">Pelican<a class="anchor-link" href="#Pelican">Â¶</a></h2><p>Pelican是一个基于python的开源库，可以将markdown, jupyter notebook(需要额外插件)等文件转成html文件，并根据meta-data和theme信息， 在生成的html中添加分类，标签，菜单，侧边栏等组件和相应的css style，生成可以用于Blog使用的html文件。</p>
 <h2 id="Jupyter-Notebook">Jupyter Notebook<a class="anchor-link" href="#Jupyter-Notebook">Â¶</a></h2><p>jupyter notebook提供了一个交互环境，可以在web浏览器一边编写code，运行并展示结果，一边用markdown添加图文视频等丰富的内容进行相应的描述。代码调试完，文章也写完，省去了将code复制粘贴到文章的繁琐的过程。既省事，也避免了文章中的code和运行时的code不一致的问题。</p>
@@ -1780,10 +1780,15 @@ git push origin master</code></pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="git报错可以参考-这里">git报错可以参考 <a href="http://blog.csdn.net/god_wot/article/details/10522405">这里</a><a class="anchor-link" href="#git报错可以参考-这里">Â¶</a></h5><p>另外publishconf.py里面我加了这个</p>
+<h5 id="git报错可以参考-这里">git报错可以参考 <a href="http://blog.csdn.net/god_wot/article/details/10522405">这里</a><a class="anchor-link" href="#git报错可以参考-这里">Â¶</a></h5><p>另外publishconf.py里面我加了这个(3.5应该不需要)</p>
 <pre><code>import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')</code></pre>
+<p>，以后如果要改Jupyter notebook,基本上运行</p>
+<pre><code>pelican content -s publishconf.py
+ghp-import output -b master
+git push origin master</code></pre>
+<p>这三条命令就可以了.</p>
 </div>
 </div>
 </div>
@@ -1791,7 +1796,8 @@ sys.setdefaultencoding('utf-8')</code></pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="将.ipynb文件也同步到Github">将.ipynb文件也同步到Github<a class="anchor-link" href="#将.ipynb文件也同步到Github">Â¶</a></h2><p>如果除了生成的html文件，我们需要将content文件夹中的.ipynb等文件也在[username].github.io保留一份，可以新建一个dev branch， 然后用经典的</p>
+<h2 id="将.ipynb文件也同步到Github">将.ipynb文件也同步到Github<a class="anchor-link" href="#将.ipynb文件也同步到Github">Â¶</a></h2><p>如果除了生成的html文件，我们需要将content文件夹中的.ipynb等文件也在[username].github.io保留一份，可以新建一个dev branch，git checkout -b dev(git checkout命令加上-b参数表示创建并切换)<br /> 
+然后用经典的</p>
 <pre><code>git add --all
 git commit -m 'you comment'
 git push origin dev</code></pre>
@@ -1799,17 +1805,6 @@ git push origin dev</code></pre>
 <h2 id="更改Theme和添加插件">更改Theme和添加插件<a class="anchor-link" href="#更改Theme和添加插件">Â¶</a></h2><p>可以去查询pelican的<a href="http://docs.getpelican.com/en/3.6.3/">官方文档</a>和pelican的<a href="https://github.com/getpelican/pelican-themes">Theme站</a>自己去进行配置。</p>
 <p>除此之外，也可以去Pelican的<a href="https://github.com/getpelican/pelican-plugins">插件站</a>挑选对自己有用的插件。</p>
 <p>由于每个Theme和插件的配置方式都有有些不同，以Theme和插件自己的说明为准。这里就不详细介绍了。</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span> 
-</pre></div>
-</div>
 </div>
 </div>
 </div>
