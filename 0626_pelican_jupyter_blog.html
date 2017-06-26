@@ -1,0 +1,1880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>如何用pelican, jupyter notebook搭建技术博客</title>
+        <link rel="stylesheet" href="https://hongfeibao1314.github.io/theme/css/main.css" />
+        <link href="https://hongfeibao1314.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="HongfeiBao's Blog Atom Feed" />
+
+        <!--[if IE]>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="https://hongfeibao1314.github.io/">HongfeiBao's Blog </a></h1>
+                <nav><ul>
+                    <li class="active"><a href="https://hongfeibao1314.github.io/category/tools.html">tools</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="https://hongfeibao1314.github.io/0626_pelican_jupyter_blog.html" rel="bookmark"
+           title="Permalink to 如何用pelican, jupyter notebook搭建技术博客">如何用pelican, jupyter notebook搭建技术博客</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2017-06-26T18:42:00+08:00">
+                Published: 一 26 六月 2017
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="https://hongfeibao1314.github.io/author/hongfei-bao.html">Hongfei Bao</a>
+        </address>
+<p>In <a href="https://hongfeibao1314.github.io/category/tools.html">tools</a>.</p>
+<p>tags: <a href="https://hongfeibao1314.github.io/tag/pelican-jupyter-blog-tool.html">pelican jupyter blog tool</a> </p>
+</footer><!-- /.post-info -->      <style type="text/css">/*!
+*
+* IPython notebook
+*
+*/
+/* CSS font colors for translated ANSI colors. */
+.ansibold {
+  font-weight: bold;
+}
+/* use dark versions for foreground, to improve visibility */
+.ansiblack {
+  color: black;
+}
+.ansired {
+  color: darkred;
+}
+.ansigreen {
+  color: darkgreen;
+}
+.ansiyellow {
+  color: #c4a000;
+}
+.ansiblue {
+  color: darkblue;
+}
+.ansipurple {
+  color: darkviolet;
+}
+.ansicyan {
+  color: steelblue;
+}
+.ansigray {
+  color: gray;
+}
+/* and light for background, for the same reason */
+.ansibgblack {
+  background-color: black;
+}
+.ansibgred {
+  background-color: red;
+}
+.ansibggreen {
+  background-color: green;
+}
+.ansibgyellow {
+  background-color: yellow;
+}
+.ansibgblue {
+  background-color: blue;
+}
+.ansibgpurple {
+  background-color: magenta;
+}
+.ansibgcyan {
+  background-color: cyan;
+}
+.ansibggray {
+  background-color: gray;
+}
+div.cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-radius: 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  width: 100%;
+  padding: 5px;
+  /* This acts as a spacer between cells, that is outside the border */
+  margin: 0px;
+  outline: none;
+  border-left-width: 1px;
+  padding-left: 5px;
+  background: linear-gradient(to right, transparent -40px, transparent 1px, transparent 1px, transparent 100%);
+}
+div.cell.jupyter-soft-selected {
+  border-left-color: #90CAF9;
+  border-left-color: #E3F2FD;
+  border-left-width: 1px;
+  padding-left: 5px;
+  border-right-color: #E3F2FD;
+  border-right-width: 1px;
+  background: #E3F2FD;
+}
+@media print {
+  div.cell.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected {
+  border-color: #ababab;
+  border-left-width: 0px;
+  padding-left: 6px;
+  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 5px, transparent 5px, transparent 100%);
+}
+@media print {
+  div.cell.selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected.jupyter-soft-selected {
+  border-left-width: 0;
+  padding-left: 6px;
+  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 7px, #E3F2FD 7px, #E3F2FD 100%);
+}
+.edit_mode div.cell.selected {
+  border-color: #66BB6A;
+  border-left-width: 0px;
+  padding-left: 6px;
+  background: linear-gradient(to right, #66BB6A -40px, #66BB6A 5px, transparent 5px, transparent 100%);
+}
+@media print {
+  .edit_mode div.cell.selected {
+    border-color: transparent;
+  }
+}
+.prompt {
+  /* This needs to be wide enough for 3 digit prompt numbers: In[100]: */
+  min-width: 14ex;
+  /* This padding is tuned to match the padding on the CodeMirror editor. */
+  padding: 0.4em;
+  margin: 0px;
+  font-family: monospace;
+  text-align: right;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+  /* Don't highlight prompt number selection */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* Use default cursor */
+  cursor: default;
+}
+@media (max-width: 540px) {
+  .prompt {
+    text-align: left;
+  }
+}
+div.inner_cell {
+  min-width: 0;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_area {
+  border: 1px solid #cfcfcf;
+  border-radius: 2px;
+  background: #f7f7f7;
+  line-height: 1.21429em;
+}
+/* This is needed so that empty prompt areas can collapse to zero height when there
+   is no content in the output_subarea and the prompt. The main purpose of this is
+   to make sure that empty JavaScript output_subareas have no height. */
+div.prompt:empty {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+div.unrecognized_cell {
+  padding: 5px 5px 5px 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.unrecognized_cell .inner_cell {
+  border-radius: 2px;
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+  border: 1px solid #cfcfcf;
+  background: #eaeaea;
+}
+div.unrecognized_cell .inner_cell a {
+  color: inherit;
+  text-decoration: none;
+}
+div.unrecognized_cell .inner_cell a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+@media (max-width: 540px) {
+  div.unrecognized_cell > div.prompt {
+    display: none;
+  }
+}
+div.code_cell {
+  /* avoid page breaking on code cells when printing */
+}
+@media print {
+  div.code_cell {
+    page-break-inside: avoid;
+  }
+}
+/* any special styling for code cells that are currently running goes here */
+div.input {
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.input {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_prompt {
+  color: #303F9F;
+  border-top: 1px solid transparent;
+}
+div.input_area > div.highlight {
+  margin: 0.4em;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+div.input_area > div.highlight > pre {
+  margin: 0px;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+/* The following gets added to the <head> if it is detected that the user has a
+ * monospace font with inconsistent normal/bold/italic height.  See
+ * notebookmain.js.  Such fonts will have keywords vertically offset with
+ * respect to the rest of the text.  The user should select a better font.
+ * See: https://github.com/ipython/ipython/issues/1503
+ *
+ * .CodeMirror span {
+ *      vertical-align: bottom;
+ * }
+ */
+.CodeMirror {
+  line-height: 1.21429em;
+  /* Changed from 1em to our global default */
+  font-size: 14px;
+  height: auto;
+  /* Changed to auto to autogrow */
+  background: none;
+  /* Changed from white to allow our bg to show through */
+}
+.CodeMirror-scroll {
+  /*  The CodeMirror docs are a bit fuzzy on if overflow-y should be hidden or visible.*/
+  /*  We have found that if it is visible, vertical scrollbars appear with font size changes.*/
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+.CodeMirror-lines {
+  /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
+  /* we have set a different line-height and want this to scale with that. */
+  padding: 0.4em;
+}
+.CodeMirror-linenumber {
+  padding: 0 8px 0 4px;
+}
+.CodeMirror-gutters {
+  border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
+}
+.CodeMirror pre {
+  /* In CM3 this went to 4px from 0 in CM2. We need the 0 value because of how we size */
+  /* .CodeMirror-lines */
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+}
+/*
+
+Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org>
+Adapted from GitHub theme
+
+*/
+.highlight-base {
+  color: #000;
+}
+.highlight-variable {
+  color: #000;
+}
+.highlight-variable-2 {
+  color: #1a1a1a;
+}
+.highlight-variable-3 {
+  color: #333333;
+}
+.highlight-string {
+  color: #BA2121;
+}
+.highlight-comment {
+  color: #408080;
+  font-style: italic;
+}
+.highlight-number {
+  color: #080;
+}
+.highlight-atom {
+  color: #88F;
+}
+.highlight-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.highlight-builtin {
+  color: #008000;
+}
+.highlight-error {
+  color: #f00;
+}
+.highlight-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.highlight-meta {
+  color: #AA22FF;
+}
+/* previously not defined, copying from default codemirror */
+.highlight-def {
+  color: #00f;
+}
+.highlight-string-2 {
+  color: #f50;
+}
+.highlight-qualifier {
+  color: #555;
+}
+.highlight-bracket {
+  color: #997;
+}
+.highlight-tag {
+  color: #170;
+}
+.highlight-attribute {
+  color: #00c;
+}
+.highlight-header {
+  color: blue;
+}
+.highlight-quote {
+  color: #090;
+}
+.highlight-link {
+  color: #00c;
+}
+/* apply the same style to codemirror */
+.cm-s-ipython span.cm-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-atom {
+  color: #88F;
+}
+.cm-s-ipython span.cm-number {
+  color: #080;
+}
+.cm-s-ipython span.cm-def {
+  color: #00f;
+}
+.cm-s-ipython span.cm-variable {
+  color: #000;
+}
+.cm-s-ipython span.cm-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-variable-2 {
+  color: #1a1a1a;
+}
+.cm-s-ipython span.cm-variable-3 {
+  color: #333333;
+}
+.cm-s-ipython span.cm-comment {
+  color: #408080;
+  font-style: italic;
+}
+.cm-s-ipython span.cm-string {
+  color: #BA2121;
+}
+.cm-s-ipython span.cm-string-2 {
+  color: #f50;
+}
+.cm-s-ipython span.cm-meta {
+  color: #AA22FF;
+}
+.cm-s-ipython span.cm-qualifier {
+  color: #555;
+}
+.cm-s-ipython span.cm-builtin {
+  color: #008000;
+}
+.cm-s-ipython span.cm-bracket {
+  color: #997;
+}
+.cm-s-ipython span.cm-tag {
+  color: #170;
+}
+.cm-s-ipython span.cm-attribute {
+  color: #00c;
+}
+.cm-s-ipython span.cm-header {
+  color: blue;
+}
+.cm-s-ipython span.cm-quote {
+  color: #090;
+}
+.cm-s-ipython span.cm-link {
+  color: #00c;
+}
+.cm-s-ipython span.cm-error {
+  color: #f00;
+}
+.cm-s-ipython span.cm-tab {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAMCAYAAAAkuj5RAAAAAXNSR0IArs4c6QAAAGFJREFUSMft1LsRQFAQheHPowAKoACx3IgEKtaEHujDjORSgWTH/ZOdnZOcM/sgk/kFFWY0qV8foQwS4MKBCS3qR6ixBJvElOobYAtivseIE120FaowJPN75GMu8j/LfMwNjh4HUpwg4LUAAAAASUVORK5CYII=);
+  background-position: right;
+  background-repeat: no-repeat;
+}
+div.output_wrapper {
+  /* this position must be relative to enable descendents to be absolute within it */
+  position: relative;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  z-index: 1;
+}
+/* class for the output area when it should be height-limited */
+div.output_scroll {
+  /* ideally, this would be max-height, but FF barfs all over that */
+  height: 24em;
+  /* FF needs this *and the wrapper* to specify full width, or it will shrinkwrap */
+  width: 100%;
+  overflow: auto;
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  display: block;
+}
+/* output div while it is collapsed */
+div.output_collapsed {
+  margin: 0px;
+  padding: 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+div.out_prompt_overlay {
+  height: 100%;
+  padding: 0px 0.4em;
+  position: absolute;
+  border-radius: 2px;
+}
+div.out_prompt_overlay:hover {
+  /* use inner shadow to get border that is computed the same on WebKit/FF */
+  -webkit-box-shadow: inset 0 0 1px #000;
+  box-shadow: inset 0 0 1px #000;
+  background: rgba(240, 240, 240, 0.5);
+}
+div.output_prompt {
+  color: #D84315;
+}
+/* This class is the outer container of all output sections. */
+div.output_area {
+  padding: 0px;
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.output_area .MathJax_Display {
+  text-align: left !important;
+}
+div.output_area 
+div.output_area 
+div.output_area img,
+div.output_area svg {
+  max-width: 100%;
+  height: auto;
+}
+div.output_area img.unconfined,
+div.output_area svg.unconfined {
+  max-width: none;
+}
+/* This is needed to protect the pre formating from global settings such
+   as that of bootstrap */
+.output {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.output_area {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+div.output_area pre {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+  color: black;
+  background-color: transparent;
+  border-radius: 0;
+}
+/* This class is for the output subarea inside the output_area and after
+   the prompt div. */
+div.output_subarea {
+  overflow-x: auto;
+  padding: 0.4em;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+  max-width: calc(100% - 14ex);
+}
+div.output_scroll div.output_subarea {
+  overflow-x: visible;
+}
+/* The rest of the output_* classes are for special styling of the different
+   output types */
+/* all text output has this class: */
+div.output_text {
+  text-align: left;
+  color: #000;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+}
+/* stdout/stderr are 'text' as well as 'stream', but execute_result/error are *not* streams */
+div.output_stderr {
+  background: #fdd;
+  /* very light red background for stderr */
+}
+div.output_latex {
+  text-align: left;
+}
+/* Empty output_javascript divs should have no height */
+div.output_javascript:empty {
+  padding: 0;
+}
+.js-error {
+  color: darkred;
+}
+/* raw_input styles */
+div.raw_input_container {
+  line-height: 1.21429em;
+  padding-top: 5px;
+}
+pre.raw_input_prompt {
+  /* nothing needed here. */
+}
+input.raw_input {
+  font-family: monospace;
+  font-size: inherit;
+  color: inherit;
+  width: auto;
+  /* make sure input baseline aligns with prompt */
+  vertical-align: baseline;
+  /* padding + margin = 0.5em between prompt and cursor */
+  padding: 0em 0.25em;
+  margin: 0em 0.25em;
+}
+input.raw_input:focus {
+  box-shadow: none;
+}
+p.p-space {
+  margin-bottom: 10px;
+}
+div.output_unrecognized {
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+}
+div.output_unrecognized a {
+  color: inherit;
+  text-decoration: none;
+}
+div.output_unrecognized a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+.rendered_html {
+  color: #000;
+  /* any extras will just be numbers: */
+}
+
+
+
+.rendered_html :link {
+  text-decoration: underline;
+}
+.rendered_html :visited {
+  text-decoration: underline;
+}
+
+
+
+
+
+
+.rendered_html h1:first-child {
+  margin-top: 0.538em;
+}
+.rendered_html h2:first-child {
+  margin-top: 0.636em;
+}
+.rendered_html h3:first-child {
+  margin-top: 0.777em;
+}
+.rendered_html h4:first-child {
+  margin-top: 1em;
+}
+.rendered_html h5:first-child {
+  margin-top: 1em;
+}
+.rendered_html h6:first-child {
+  margin-top: 1em;
+}
+
+
+
+
+
+
+
+
+.rendered_html * + ul {
+  margin-top: 1em;
+}
+.rendered_html * + ol {
+  margin-top: 1em;
+}
+
+
+.rendered_html pre,
+
+
+
+.rendered_html tr,
+.rendered_html th,
+
+.rendered_html td,
+
+
+.rendered_html * + table {
+  margin-top: 1em;
+}
+
+.rendered_html * + p {
+  margin-top: 1em;
+}
+
+.rendered_html * + img {
+  margin-top: 1em;
+}
+.rendered_html img,
+
+.rendered_html img.unconfined,
+
+div.text_cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.text_cell > div.prompt {
+    display: none;
+  }
+}
+div.text_cell_render {
+  /*font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;*/
+  outline: none;
+  resize: none;
+  width: inherit;
+  border-style: none;
+  padding: 0.5em 0.5em 0.5em 0.4em;
+  color: #000;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+a.anchor-link:link {
+  text-decoration: none;
+  padding: 0px 20px;
+  visibility: hidden;
+}
+h1:hover .anchor-link,
+h2:hover .anchor-link,
+h3:hover .anchor-link,
+h4:hover .anchor-link,
+h5:hover .anchor-link,
+h6:hover .anchor-link {
+  visibility: visible;
+}
+.text_cell.rendered .input_area {
+  display: none;
+}
+.text_cell.rendered 
+.text_cell.unrendered .text_cell_render {
+  display: none;
+}
+.cm-header-1,
+.cm-header-2,
+.cm-header-3,
+.cm-header-4,
+.cm-header-5,
+.cm-header-6 {
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.cm-header-1 {
+  font-size: 185.7%;
+}
+.cm-header-2 {
+  font-size: 157.1%;
+}
+.cm-header-3 {
+  font-size: 128.6%;
+}
+.cm-header-4 {
+  font-size: 110%;
+}
+.cm-header-5 {
+  font-size: 100%;
+  font-style: italic;
+}
+.cm-header-6 {
+  font-size: 100%;
+  font-style: italic;
+}
+</style>
+<style type="text/css">.highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f8f8f8; }
+.highlight .c { color: #408080; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #FF0000 } /* Error */
+.highlight .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight .o { color: #666666 } /* Operator */
+.highlight .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #408080; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #0044DD } /* Generic.Traceback */
+.highlight .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #B00040 } /* Keyword.Type */
+.highlight .m { color: #666666 } /* Literal.Number */
+.highlight .s { color: #BA2121 } /* Literal.String */
+.highlight .na { color: #7D9029 } /* Name.Attribute */
+.highlight .nb { color: #008000 } /* Name.Builtin */
+.highlight .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.highlight .no { color: #880000 } /* Name.Constant */
+.highlight .nd { color: #AA22FF } /* Name.Decorator */
+.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #0000FF } /* Name.Function */
+.highlight .nl { color: #A0A000 } /* Name.Label */
+.highlight .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #19177C } /* Name.Variable */
+.highlight .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #666666 } /* Literal.Number.Bin */
+.highlight .mf { color: #666666 } /* Literal.Number.Float */
+.highlight .mh { color: #666666 } /* Literal.Number.Hex */
+.highlight .mi { color: #666666 } /* Literal.Number.Integer */
+.highlight .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
+.highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.highlight .sx { color: #008000 } /* Literal.String.Other */
+.highlight .sr { color: #BB6688 } /* Literal.String.Regex */
+.highlight .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0000FF } /* Name.Function.Magic */
+.highlight .vc { color: #19177C } /* Name.Variable.Class */
+.highlight .vg { color: #19177C } /* Name.Variable.Global */
+.highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .vm { color: #19177C } /* Name.Variable.Magic */
+.highlight .il { color: #666666 } /* Literal.Number.Integer.Long */</style>
+<style type="text/css">
+/* Temporary definitions which will become obsolete with Notebook release 5.0 */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-bold { font-weight: bold; }
+</style>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="说明">说明<a class="anchor-link" href="#说明">Â¶</a></h1><p>Jupyter Notebook是进行代码实验非常好用的工具， 可以一边交互式的进行代码探索，一边利用markdown穿插丰富文本，图片，视频等描述资源。</p>
+<p>另一方面，很多工程师也有写技术Blog记录自己的心得笔记的习惯。 如果能一边用Jupyter Notebook实验代码， 一边添加相关的文本描述， 最后直接将Jupyter Notebook的内容发布为Blog， 那将获得非常流畅的技术Blog创作体验。</p>
+<p>(比如要写一份分析报告， 首先要开matlab编写代码， 运行代码， 将代码的结果保存为文本， 图片，Excel等文件， 然后再开Word， 一边写报告， 一边要导入图片， 数据。 更糟糕的是， 一旦代码发生更改， 程序生成的结果发生了改变， 可能又得重新调整Word文档。 这个过程非常的繁琐耗时。 由于报告的内容和代码并非紧密的结合， 如果时间一久， 那么很可能会想不起来当时某个处理的细节， 然后又找不到当时的代码。)</p>
+<p>这篇文章就是讲解如何利用Pelican将Jupyter Notebook上做的实验直接发布在Git Pages上。</p>
+<p>这里是一个效果展示。<a href="https://github.com/junjiecai/jupyter_labs/tree/master/exolution">这个git repo</a>用于存放jupyter notebooks实验，而<a href="https://junjiecai.github.io">这里</a>是这个notebooks被发布成blogs以后的效果。</p>
+<h1 id="重要的组件">重要的组件<a class="anchor-link" href="#重要的组件">Â¶</a></h1><p>在Jupyter Notebook中编写内容， 然后由Pelican负责将jupyter notebook组装成blog html， Github Pages则提供了网站服务，让大家能通过浏览器看到你的Blog。</p>
+<p>不过要注意的是，转成html后的代码部分是不能运行的，如果希望读者享受到Jupyter Notebook的便利，可以将文章对应的.ipynb源文件的地址(可以把源文件也放在Github)贴在文章里，供读者下载。例如这篇文章的。</p>
+<h2 id="Github-Pages">Github Pages<a class="anchor-link" href="#Github-Pages">Â¶</a></h2><p>Github Pages是github公司提供的免费的静态网站托管服务，具体使用上，就是注册用户在Gihub上创建过一个[username].github.io的repo,并且在里面的master branch存有html文件的话，那么其他人就可以通过<a href="http://[username].github.io">http://[username].github.io</a> 这个链接访问到这些html页面。</p>
+<p>例如我把这篇文章对应的blog_with_jupyter.html放在了junjiecai.github.io的repo中的master branch里(这里是<a href="https://github.com/junjiecai/junjiecai.github.io/tree/master/posts/2016/Aug/10/blog_with_jupyter">链接</a>，那么大家就可以通过(<a href="http://junjiecai.github.io/posts/2016/Aug/10/blog_with_jupyter">http://junjiecai.github.io/posts/2016/Aug/10/blog_with_jupyter</a>) 看到这篇文章</p>
+<p>如果用户愿意，也可以绑定自己准备的域名，代替<a href="http://[username].github.io">http://[username].github.io</a></p>
+<h2 id="Pelican">Pelican<a class="anchor-link" href="#Pelican">Â¶</a></h2><p>Pelican是一个基于python的开源库，可以将markdown, jupyter notebook(需要额外插件)等文件转成html文件，并根据meta-data和theme信息， 在生成的html中添加分类，标签，菜单，侧边栏等组件和相应的css style，生成可以用于Blog使用的html文件。</p>
+<h2 id="Jupyter-Notebook">Jupyter Notebook<a class="anchor-link" href="#Jupyter-Notebook">Â¶</a></h2><p>jupyter notebook提供了一个交互环境，可以在web浏览器一边编写code，运行并展示结果，一边用markdown添加图文视频等丰富的内容进行相应的描述。代码调试完，文章也写完，省去了将code复制粘贴到文章的繁琐的过程。既省事，也避免了文章中的code和运行时的code不一致的问题。</p>
+<p>另一方面，如果读者如果下载了jupyter notebook源文件，就可以直接在浏览器上边看文章，边调试代码，体验也流畅很多。</p>
+<p>Jupyter notebook支持python, R, scala, Julia等40多种编程语言， 如果对Jupyter Notebook不了解的话，请去<a href="http://jupyter.org/">官网</a>了解一下(似乎被墙了，请自备梯子)。</p>
+<p>下面就是Jupyter Notebook编写了一段可视化代码，运行后展示结果的例子。</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="kn">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">"dark"</span><span class="p">)</span>
+<span class="n">rs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+
+<span class="c1"># Set up the matplotlib figure</span>
+<span class="n">f</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1"># Rotate the starting point around the cubehelix hue circle</span>
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">flat</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">)):</span>
+
+    <span class="c1"># Create a cubehelix colormap to use with kdeplot</span>
+    <span class="n">cmap</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">cubehelix_palette</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">s</span><span class="p">,</span> <span class="n">light</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">as_cmap</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="c1"># Generate and plot a random bivariate dataset</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="n">shade</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">cut</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+<span class="n">f</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+RK5CYII=
+" />
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="系统环境">系统环境<a class="anchor-link" href="#系统环境">Â¶</a></h1><ul>
+<li>我的操作系统是Ubunut 16.04</li>
+<li>Python版本是2.7</li>
+</ul>
+<p>windows/mac或是python3.5的话安装过程请自行做一些相应的调整-_-</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="步骤">步骤<a class="anchor-link" href="#步骤">Â¶</a></h1><h2 id="安装Pelican和Jupyter">安装Pelican和Jupyter<a class="anchor-link" href="#安装Pelican和Jupyter">Â¶</a></h2><p>下面是安装过程</p>
+<ul>
+<li>创建一个文件夹， 我用的名字是jupyter-blog</li>
+<li>(可选步骤)在jupyter-blog新建一个virtual env, 不会的话请看<a href="http://docs.python-guide.org/en/latest/dev/virtualenvs/">这里</a></li>
+</ul>
+<p>当然如果不需要让Pelican使用单独的的python环境的话， 跳过这个步骤也没问题</p>
+<ul>
+<li>安装所需的依赖包
+由于所需的依赖比较多，因此可以在jupyter-blog创建requirements.txt文件后一起安装。 requirements.txt中的内容是
+<pre><code>Markdown
+pelican
+jupyter
+ipython
+nbconvert
+beautifulsoup4
+matplotlib</code></pre>
+然后运行<code>pip install -r requirements.txt</code>进行安装。 </li>
+</ul>
+<h2 id="初始化Pelican">初始化Pelican<a class="anchor-link" href="#初始化Pelican">Â¶</a></h2><p>在jupyter-blog目录运行<code>pelican-quickstart</code>，会弹出一系列的问题，全部填完后Pelican就会完成初始化</p>
+<p>下面只列出几个重要的问题， 和我填的内容, 根据自己的情况调整即可。剩余的问题直接按回车，使用默认值即可。</p>
+<pre><code>What will be the title of this web site? HongfeiBao's Blog
+Who will be the author of this web site? HongfeiBao
+What will be the default language of this web site? en
+Do you want to specify a URL prefix? e.g., http://example.com (Y/n) n
+What is your time zone? [Europe/Paris] Asia/Shanghai</code></pre>
+<p>这步骤完成后， 文件夹的结构看上去应该是这样的</p>
+<pre><code>jupyter-blog
+│   output
+│   content
+│   develop_server.sh
+│   fabfile.py
+│   Makefile
+│   requirements.txt
+│   pelicanconf.py
+│   publishconf.py</code></pre>
+<h2 id="安装Jupyter-Notebook插件">安装Jupyter Notebook插件<a class="anchor-link" href="#安装Jupyter-Notebook插件">Â¶</a></h2><p>经过前面的步骤,Pelican已经算是安装好了，但是默认情况下，它是不支持Jupyter Notebook的,因此需要额外的安装Jupyter Plugin。</p>
+<ul>
+<li>如果没有安装git, 先用sudo apt-get install git安装git</li>
+<li>在jupyter-blog运行<code>git init</code>， 将jupyter-blog变成git repository</li>
+<li>在jupyter-blog中创建一个叫plugin的文件夹</li>
+<li>在jupyter-blog中运行<code>git submodule add git://github.com/danielfrg/pelican-ipynb.git plugins/ipynb</code></li>
+</ul>
+<p>为了激活插件，还要记得修改jupyter-blog中的pelicanconf.py文件，在最后添加以下几行，并且保存</p>
+<pre><code>MARKUP = ('md', 'ipynb')
+
+PLUGIN_PATHS = [ './plugins' ]  # 如果像原文直接PLUGIN_PATH = `./plugins`而不使>用列表会报warning
+PLUGINS = ['ipynb.markup']</code></pre>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="发布Blog">发布Blog<a class="anchor-link" href="#发布Blog">Â¶</a></h2><h3 id="编写Jupyter-Notebook">编写Jupyter Notebook<a class="anchor-link" href="#编写Jupyter-Notebook">Â¶</a></h3><ul>
+<li><p>在jupyter-blog/content/下打开jupyter notebook， 撰写第一份blog， 并且保存为.ipynb文件。 已当前的这篇文章为例， 我使用的文件名是0626_pelican_jupyter_blog.ipynb</p>
+</li>
+<li><p>然后新建一个同名的文件, 但是后缀要改成.ipynb-meta。 在我的例子里， 就是0626_pelican_jupyter_blog.ipynb-meta<br />
+这个文件主要是为了定义blog的名称，作者，时间，分类等信息, pelican生成html的时候需要用到这些信息。 在该文件中添加以下信息(请根据自己的情况修改)</p>
+</li>
+</ul>
+<pre><code>Title: 如何用pelican, jupyter notebook搭建技术博客
+Slug: 0626_pelican_jupyter_blog
+Date: 2017-06-26 18:42
+Category: tools
+Tags: pelican jupyter blog tool
+Author: Hongfei Bao
+Summary: 简单介绍了如何在Ubuntu16.04系统下利用Pelican和GitPages，用Jupyter Notebook撰写Blog</code></pre>
+<p><code>Slug</code>是访问这篇Blog所需要的url路径。例如Server地址是<a href="http://hongfeibao1314.github.io/">http://hongfeibao1314.github.io/</a> 的话, 那么这篇blog的访问链接就是<a href="http://hongfeibao1314.github.io/0626_pelican_jupyter_blog">http://hongfeibao1314.github.io/0626_pelican_jupyter_blog</a></p>
+<p><code>Tags</code>表示标签， 不过多个Tag之间注意要用空格去区分</p>
+<p>其余的应该不用解释了:)</p>
+<p>这步骤完成后， 文件夹的结构看上去应该是这样的</p>
+<pre><code>jupyter-blog
+│   output
+│   content
+    | 0626_pelican_jupyter_blog.ipynb
+    | 0626_pelican_jupyter_blog.ipynb-meta
+│   develop_server.sh
+│   fabfile.py
+│   Makefile
+│   requirements.txt
+│   pelicanconf.py
+│   publishconf.py</code></pre>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="生成HTML文件并在本地测试">生成HTML文件并在本地测试<a class="anchor-link" href="#生成HTML文件并在本地测试">Â¶</a></h2><ul>
+<li>切换到jupyter-blog文件夹</li>
+<li>运行<code>pelican content</code>。 这样Pelican就会读取jupyter-blog/content文件夹中的.ipynb和.ipynb-meta文件，并且结合theme等内容， 在jupyter-blog/output文件夹中生成相应的html文件。运行完这步后，可以在output文件夹中看到新增了不少.html文件</li>
+<li>切换到jupyter-blog/output文件夹， 运行<code>python -m pelican.server</code>启动一个本地的服务起， 然后打开浏览器，输入localhost:8000，一切顺利的话就可以看到自己的blog文章页面</li>
+</ul>
+<h2 id="将HTML文件部署到到GitHub-Pages">将HTML文件部署到到GitHub Pages<a class="anchor-link" href="#将HTML文件部署到到GitHub-Pages">Â¶</a></h2><ul>
+<li>没注册Github的，先去<a href="www.github.com">Github</a>注册</li>
+<li>在github创建一个叫[username].github.io的repository, <strong>把[username]替换成注册时用的username,后面相同。</strong></li>
+<li>将本地的jupyter-blog文件夹和github上的[username].github.io建立连接<br />
+切换到jupyter-blog文件夹后运行<code>git remote add origin git@github.com:[username]/[username].github.io.git</code></li>
+<li>在jupyter-blog创建一个.gitignore(这不是后缀，完整的文件名就是这样)文件， 里面的内容可以参考<a href="https://github.com/github/gitignore/blob/master/Python.gitignore">这里</a>， 将一些不必要的内容排除出git同步的范围。</li>
+<li>修改publishconf.py文件， 将SITEURL改成<a href="https://[username].github.io">https://[username].github.io</a> 例如我的是:(https:hongfeibao1314.github.io)</li>
+</ul>
+<p>要部署到GitPages前，在jupyter-blog运行<code>pelican content -s publishconf.py</code>,重新生成html文件
+(如果要在本地预览，用<code>pelican content</code>)</p>
+<p>最后利用</p>
+<pre><code>ghp-import output -b master
+git push origin master</code></pre>
+<p>提交html页面至[username].github.io的master repo即可。</p>
+<p>注:GitHub Pages识别的是[username].github.io中master branch repo根目录下的.html文件， 而我们本地生成的html文件是在output文件家中， 因此这里才需要<code>ghp-import</code>的协助，将output文件夹中的内容部署后实现放在[username].github.io根目录下。</p>
+<p>成功后就可以在[username].github.io的master分支看到变化。 不过如果要在<a href="https://[username].github.io">https://[username].github.io</a> 的页面上看到变化，可能要等上几分钟。</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="git报错可以参考-这里">git报错可以参考 <a href="http://blog.csdn.net/god_wot/article/details/10522405">这里</a><a class="anchor-link" href="#git报错可以参考-这里">Â¶</a></h5><p>另外publishconf.py里面我加了这个</p>
+<pre><code>import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')</code></pre>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="将.ipynb文件也同步到Github">将.ipynb文件也同步到Github<a class="anchor-link" href="#将.ipynb文件也同步到Github">Â¶</a></h2><p>如果除了生成的html文件，我们需要将content文件夹中的.ipynb等文件也在[username].github.io保留一份，可以新建一个dev branch， 然后用经典的</p>
+<pre><code>git add --all
+git commit -m 'you comment'
+git push origin dev</code></pre>
+<p>流程将<code>jupyter-blog</code>的内容添加到dev branch即可。</p>
+<h2 id="更改Theme和添加插件">更改Theme和添加插件<a class="anchor-link" href="#更改Theme和添加插件">Â¶</a></h2><p>可以去查询pelican的<a href="http://docs.getpelican.com/en/3.6.3/">官方文档</a>和pelican的<a href="https://github.com/getpelican/pelican-themes">Theme站</a>自己去进行配置。</p>
+<p>除此之外，也可以去Pelican的<a href="https://github.com/getpelican/pelican-plugins">插件站</a>挑选对自己有用的插件。</p>
+<p>由于每个Theme和插件的配置方式都有有些不同，以Theme和插件自己的说明为准。这里就不详细介绍了。</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: 'center'," +
+        "    displayIndent: '0em'," +
+        "    showMathMenu: true," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['$','$'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        " linebreaks: { automatic: true, width: '95% container' }, " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'black ! important'} }" +
+        "    } " +
+        "}); ";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>links</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                            <li><a href="#">You can modify those links in your config file</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="https://hongfeibao1314.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                            <li><a href="#">You can add links in your config file</a></li>
+                            <li><a href="#">Another social link</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>
