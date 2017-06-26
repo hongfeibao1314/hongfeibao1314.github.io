@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>HongfeiBao's Blog</title><link href="http://hongfeibao1314.github.io/" rel="alternate"></link><link href="http://hongfeibao1314.github.io/feeds/all.atom.xml" rel="self"></link><id>http://hongfeibao1314.github.io/</id><updated>2017-06-26T18:42:00+08:00</updated><entry><title>如何用pelican, jupyter notebook搭建技术博客</title><link href="http://hongfeibao1314.github.io/0626_pelican_jupyter_blog.html" rel="alternate"></link><published>2017-06-26T18:42:00+08:00</published><updated>2017-06-26T18:42:00+08:00</updated><author><name>Hongfei Bao</name></author><id>tag:hongfeibao1314.github.io,2017-06-26:/0626_pelican_jupyter_blog.html</id><summary type="html">
+<feed xmlns="http://www.w3.org/2005/Atom"><title>HongfeiBao's Blog</title><link href="https://hongfeibao1314.github.io/" rel="alternate"></link><link href="https://hongfeibao1314.github.io/feeds/all.atom.xml" rel="self"></link><id>https://hongfeibao1314.github.io/</id><updated>2017-06-26T18:42:00+08:00</updated><entry><title>如何用pelican, jupyter notebook搭建技术博客</title><link href="https://hongfeibao1314.github.io/0626_pelican_jupyter_blog.html" rel="alternate"></link><published>2017-06-26T18:42:00+08:00</published><updated>2017-06-26T18:42:00+08:00</updated><author><name>Hongfei Bao</name></author><id>tag:hongfeibao1314.github.io,2017-06-26:/0626_pelican_jupyter_blog.html</id><summary type="html">
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
@@ -1675,7 +1675,7 @@ What is your time zone? [Europe/Paris] Asia/Shanghai&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;为了激活插件，还要记得修改jupyter-blog中的pelicanconf.py文件，在最后添加以下几行，并且保存&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;MARKUP = ('md', 'ipynb')
 
-PLUGIN_PATH = './plugins'
+PLUGIN_PATHS = [ './plugins' ]  # 如果像原文直接PLUGIN_PATH = `./plugins`而不使&gt;用列表会报warning
 PLUGINS = ['ipynb.markup']&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1687,7 +1687,8 @@ PLUGINS = ['ipynb.markup']&lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id="发布Blog"&gt;发布Blog&lt;a class="anchor-link" href="#发布Blog"&gt;Â¶&lt;/a&gt;&lt;/h2&gt;&lt;h3 id="编写Jupyter-Notebook"&gt;编写Jupyter Notebook&lt;a class="anchor-link" href="#编写Jupyter-Notebook"&gt;Â¶&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;p&gt;在jupyter-blog/content/下打开jupyter notebook， 撰写第一份blog， 并且保存为.ipynb文件。 已当前的这篇文章为例， 我使用的文件名是0626_pelican_jupyter_blog.ipynb&lt;/p&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;p&gt;然后新建一个同名的文件, 但是后缀要改成.ipynb-meta。 在我的例子里， 就是0626_pelican_jupyter_blog.ipynb-meta这个文件主要是为了定义blog的名称，作者，时间，分类等信息, pelican生成html的时候需要用到这些信息。 在该文件中添加以下信息(请根据自己的情况修改)&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;然后新建一个同名的文件, 但是后缀要改成.ipynb-meta。 在我的例子里， 就是0626_pelican_jupyter_blog.ipynb-meta&lt;br /&gt;
+这个文件主要是为了定义blog的名称，作者，时间，分类等信息, pelican生成html的时候需要用到这些信息。 在该文件中添加以下信息(请根据自己的情况修改)&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre&gt;&lt;code&gt;Title: 如何用pelican, jupyter notebook搭建技术博客
@@ -1715,6 +1716,17 @@ Summary: 简单介绍了如何在Ubuntu16.04系统下利用Pelican和GitPages，
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [1]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;__future__&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;unicode_literals&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
@@ -1730,7 +1742,7 @@ Summary: 简单介绍了如何在Ubuntu16.04系统下利用Pelican和GitPages，
 &lt;li&gt;将本地的jupyter-blog文件夹和github上的[username].github.io建立连接&lt;br /&gt;
 切换到jupyter-blog文件夹后运行&lt;code&gt;git remote add origin git@github.com:[username]/[username].github.io.git&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;在jupyter-blog创建一个.gitignore(这不是后缀，完整的文件名就是这样)文件， 里面的内容可以参考&lt;a href="https://github.com/github/gitignore/blob/master/Python.gitignore"&gt;这里&lt;/a&gt;， 将一些不必要的内容排除出git同步的范围。&lt;/li&gt;
-&lt;li&gt;修改publishconf.py文件， 将SITEURL改成&lt;a href="http://[username].github.io"&gt;http://[username].github.io&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;修改publishconf.py文件， 将SITEURL改成&lt;a href="https://[username].github.io"&gt;https://[username].github.io&lt;/a&gt; 例如我的是:(https:hongfeibao1314.github.io)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;要部署到GitPages前，在jupyter-blog运行&lt;code&gt;pelican content -s publishconf.py&lt;/code&gt;,重新生成html文件
 (如果要在本地预览，用&lt;code&gt;pelican content&lt;/code&gt;)&lt;/p&gt;
@@ -1739,7 +1751,7 @@ Summary: 简单介绍了如何在Ubuntu16.04系统下利用Pelican和GitPages，
 git push origin master&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;提交html页面至[username].github.io的master repo即可。&lt;/p&gt;
 &lt;p&gt;注:GitHub Pages识别的是[username].github.io中master branch repo根目录下的.html文件， 而我们本地生成的html文件是在output文件家中， 因此这里才需要&lt;code&gt;ghp-import&lt;/code&gt;的协助，将output文件夹中的内容部署后实现放在[username].github.io根目录下。&lt;/p&gt;
-&lt;p&gt;成功后就可以在[username].github.io的master分支看到变化。 不过如果要在&lt;a href="http://[username].github.io"&gt;http://[username].github.io&lt;/a&gt; 的页面上看到变化，可能要等上几分钟。&lt;/p&gt;
+&lt;p&gt;成功后就可以在[username].github.io的master分支看到变化。 不过如果要在&lt;a href="https://[username].github.io"&gt;https://[username].github.io&lt;/a&gt; 的页面上看到变化，可能要等上几分钟。&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;

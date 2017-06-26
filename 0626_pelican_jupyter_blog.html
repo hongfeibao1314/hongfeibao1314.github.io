@@ -3,7 +3,8 @@
 <head>
         <meta charset="utf-8" />
         <title>如何用pelican, jupyter notebook搭建技术博客</title>
-        <link rel="stylesheet" href="/theme/css/main.css" />
+        <link rel="stylesheet" href="https://hongfeibao1314.github.io/theme/css/main.css" />
+        <link href="https://hongfeibao1314.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="HongfeiBao's Blog Atom Feed" />
 
         <!--[if IE]>
             <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -12,16 +13,16 @@
 
 <body id="index" class="home">
         <header id="banner" class="body">
-                <h1><a href="/">HongfeiBao's Blog </a></h1>
+                <h1><a href="https://hongfeibao1314.github.io/">HongfeiBao's Blog </a></h1>
                 <nav><ul>
-                    <li class="active"><a href="/category/tools.html">tools</a></li>
+                    <li class="active"><a href="https://hongfeibao1314.github.io/category/tools.html">tools</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
 <section id="content" class="body">
   <article>
     <header>
       <h1 class="entry-title">
-        <a href="/0626_pelican_jupyter_blog.html" rel="bookmark"
+        <a href="https://hongfeibao1314.github.io/0626_pelican_jupyter_blog.html" rel="bookmark"
            title="Permalink to 如何用pelican, jupyter notebook搭建技术博客">如何用pelican, jupyter notebook搭建技术博客</a></h1>
     </header>
 
@@ -32,10 +33,10 @@
         </abbr>
 
         <address class="vcard author">
-                By                         <a class="url fn" href="/author/hongfei-bao.html">Hongfei Bao</a>
+                By                         <a class="url fn" href="https://hongfeibao1314.github.io/author/hongfei-bao.html">Hongfei Bao</a>
         </address>
-<p>In <a href="/category/tools.html">tools</a>.</p>
-<p>tags: <a href="/tag/pelican-jupyter-blog-tool.html">pelican jupyter blog tool</a> </p>
+<p>In <a href="https://hongfeibao1314.github.io/category/tools.html">tools</a>.</p>
+<p>tags: <a href="https://hongfeibao1314.github.io/tag/pelican-jupyter-blog-tool.html">pelican jupyter blog tool</a> </p>
 </footer><!-- /.post-info -->      <style type="text/css">/*!
 *
 * IPython notebook
@@ -1695,7 +1696,7 @@ What is your time zone? [Europe/Paris] Asia/Shanghai</code></pre>
 <p>为了激活插件，还要记得修改jupyter-blog中的pelicanconf.py文件，在最后添加以下几行，并且保存</p>
 <pre><code>MARKUP = ('md', 'ipynb')
 
-PLUGIN_PATH = './plugins'
+PLUGIN_PATHS = [ './plugins' ]  # 如果像原文直接PLUGIN_PATH = `./plugins`而不使>用列表会报warning
 PLUGINS = ['ipynb.markup']</code></pre>
 </div>
 </div>
@@ -1707,7 +1708,8 @@ PLUGINS = ['ipynb.markup']</code></pre>
 <h2 id="发布Blog">发布Blog<a class="anchor-link" href="#发布Blog">Â¶</a></h2><h3 id="编写Jupyter-Notebook">编写Jupyter Notebook<a class="anchor-link" href="#编写Jupyter-Notebook">Â¶</a></h3><ul>
 <li><p>在jupyter-blog/content/下打开jupyter notebook， 撰写第一份blog， 并且保存为.ipynb文件。 已当前的这篇文章为例， 我使用的文件名是0626_pelican_jupyter_blog.ipynb</p>
 </li>
-<li><p>然后新建一个同名的文件, 但是后缀要改成.ipynb-meta。 在我的例子里， 就是0626_pelican_jupyter_blog.ipynb-meta这个文件主要是为了定义blog的名称，作者，时间，分类等信息, pelican生成html的时候需要用到这些信息。 在该文件中添加以下信息(请根据自己的情况修改)</p>
+<li><p>然后新建一个同名的文件, 但是后缀要改成.ipynb-meta。 在我的例子里， 就是0626_pelican_jupyter_blog.ipynb-meta<br />
+这个文件主要是为了定义blog的名称，作者，时间，分类等信息, pelican生成html的时候需要用到这些信息。 在该文件中添加以下信息(请根据自己的情况修改)</p>
 </li>
 </ul>
 <pre><code>Title: 如何用pelican, jupyter notebook搭建技术博客
@@ -1735,6 +1737,17 @@ Summary: 简单介绍了如何在Ubuntu16.04系统下利用Pelican和GitPages，
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -1750,7 +1763,7 @@ Summary: 简单介绍了如何在Ubuntu16.04系统下利用Pelican和GitPages，
 <li>将本地的jupyter-blog文件夹和github上的[username].github.io建立连接<br />
 切换到jupyter-blog文件夹后运行<code>git remote add origin git@github.com:[username]/[username].github.io.git</code></li>
 <li>在jupyter-blog创建一个.gitignore(这不是后缀，完整的文件名就是这样)文件， 里面的内容可以参考<a href="https://github.com/github/gitignore/blob/master/Python.gitignore">这里</a>， 将一些不必要的内容排除出git同步的范围。</li>
-<li>修改publishconf.py文件， 将SITEURL改成<a href="http://[username].github.io">http://[username].github.io</a></li>
+<li>修改publishconf.py文件， 将SITEURL改成<a href="https://[username].github.io">https://[username].github.io</a> 例如我的是:(https:hongfeibao1314.github.io)</li>
 </ul>
 <p>要部署到GitPages前，在jupyter-blog运行<code>pelican content -s publishconf.py</code>,重新生成html文件
 (如果要在本地预览，用<code>pelican content</code>)</p>
@@ -1759,7 +1772,7 @@ Summary: 简单介绍了如何在Ubuntu16.04系统下利用Pelican和GitPages，
 git push origin master</code></pre>
 <p>提交html页面至[username].github.io的master repo即可。</p>
 <p>注:GitHub Pages识别的是[username].github.io中master branch repo根目录下的.html文件， 而我们本地生成的html文件是在output文件家中， 因此这里才需要<code>ghp-import</code>的协助，将output文件夹中的内容部署后实现放在[username].github.io根目录下。</p>
-<p>成功后就可以在[username].github.io的master分支看到变化。 不过如果要在<a href="http://[username].github.io">http://[username].github.io</a> 的页面上看到变化，可能要等上几分钟。</p>
+<p>成功后就可以在[username].github.io的master分支看到变化。 不过如果要在<a href="https://[username].github.io">https://[username].github.io</a> 的页面上看到变化，可能要等上几分钟。</p>
 </div>
 </div>
 </div>
@@ -1836,6 +1849,7 @@ git push origin dev</code></pre>
                 <div class="social">
                         <h2>social</h2>
                         <ul>
+                            <li><a href="https://hongfeibao1314.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
 
                             <li><a href="#">You can add links in your config file</a></li>
                             <li><a href="#">Another social link</a></li>
