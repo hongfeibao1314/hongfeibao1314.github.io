@@ -1016,7 +1016,7 @@ h6:hover .anchor-link {
 <h1 id="重要的组件">重要的组件<a class="anchor-link" href="#重要的组件">Â¶</a></h1><p>在Jupyter Notebook中编写内容， 然后由Pelican负责将jupyter notebook组装成blog html， Github Pages则提供了网站服务，让大家能通过浏览器看到你的Blog。</p>
 <p>不过要注意的是，转成html后的代码部分是不能运行的，如果希望读者享受到Jupyter Notebook的便利，可以将文章对应的.ipynb源文件的地址(可以把源文件也放在Github)贴在文章里，供读者下载。例如这篇文章的。</p>
 <h2 id="Github-Pages">Github Pages<a class="anchor-link" href="#Github-Pages">Â¶</a></h2><p>Github Pages是github公司提供的免费的静态网站托管服务，具体使用上，就是注册用户在Gihub上创建过一个[username].github.io的repo,并且在里面的master branch存有html文件的话，那么其他人就可以通过<a href="http://[username].github.io">http://[username].github.io</a> 这个链接访问到这些html页面。</p>
-<p>例如我把这篇文章对应的0626_pelican_jupyter_blog.html放在了hongfeibao1314.github.io的repo中的master branch里(这里是<a href="https://hongfeibao1314.github.io/">链接</a>，那么大家就可以通过(<a href="https://hongfeibao1314.github.io/0626_pelican_jupyter_blog">https://hongfeibao1314.github.io/0626_pelican_jupyter_blog</a>) 看到这篇文章</p>
+<p>例如我把这篇文章对应的0626_pelican_jupyter_blog.html放在了hongfeibao1314.github.io的repo中的master branch里(这里是<a href="https://hongfeibao1314.github.io/">链接</a>，那么大家就可以通过(<a href="https://hongfeibao1314.github.io">https://hongfeibao1314.github.io</a>) 看到这篇文章</p>
 <p>如果用户愿意，也可以绑定自己准备的域名，代替<a href="http://[username].github.io">http://[username].github.io</a></p>
 <h2 id="Pelican">Pelican<a class="anchor-link" href="#Pelican">Â¶</a></h2><p>Pelican是一个基于python的开源库，可以将markdown, jupyter notebook(需要额外插件)等文件转成html文件，并根据meta-data和theme信息， 在生成的html中添加分类，标签，菜单，侧边栏等组件和相应的css style，生成可以用于Blog使用的html文件。</p>
 <h2 id="Jupyter-Notebook">Jupyter Notebook<a class="anchor-link" href="#Jupyter-Notebook">Â¶</a></h2><p>jupyter notebook提供了一个交互环境，可以在web浏览器一边编写code，运行并展示结果，一边用markdown添加图文视频等丰富的内容进行相应的描述。代码调试完，文章也写完，省去了将code复制粘贴到文章的繁琐的过程。既省事，也避免了文章中的code和运行时的code不一致的问题。</p>
@@ -1800,6 +1800,25 @@ git push origin dev</code></pre>
 <h2 id="更改Theme和添加插件">更改Theme和添加插件<a class="anchor-link" href="#更改Theme和添加插件">Â¶</a></h2><p>可以去查询pelican的<a href="http://docs.getpelican.com/en/3.6.3/">官方文档</a>和pelican的<a href="https://github.com/getpelican/pelican-themes">Theme站</a>自己去进行配置。</p>
 <p>除此之外，也可以去Pelican的<a href="https://github.com/getpelican/pelican-plugins">插件站</a>挑选对自己有用的插件。</p>
 <p>由于每个Theme和插件的配置方式都有有些不同，以Theme和插件自己的说明为准。这里就不详细介绍了。</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="备注">备注<a class="anchor-link" href="#备注">Â¶</a></h1><p>目前这只是粗糙了实现了一个静态网页的样子，以后可以在master branch里面建一个index索引页面或者修改theme进行更独特化的设置</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span> 
+</pre></div>
+</div>
 </div>
 </div>
 </div>
