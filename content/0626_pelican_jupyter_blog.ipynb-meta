@@ -1,0 +1,7 @@
+Title: 如何用pelican, jupyter notebook搭建技术博客
+Slug: 0626_pelican_jupyter_blog
+Date: 2017-06-26 18:42
+Category: tools
+Tags: pelican jupyter blog tool
+Author: Hongfei Bao
+Summary: 简单介绍了如何在Ubuntu16.04系统下利用Pelican和GitPages，用Jupyter Notebook撰写Blog
